@@ -1,0 +1,80 @@
+{
+  "name": "anchor",
+  "version": "1.0.0",
+  "description": "Content governance for UX professionals",
+  "main": "public/electron.js",
+  "homepage": "./",
+  "private": true,
+  "author": {
+    "name": "Tyler Lyman"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "lucide-react": "^0.263.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@electron/notarize": "^3.1.1",
+    "concurrently": "^8.2.0",
+    "electron": "^25.3.1",
+    "electron-builder": "^24.6.3",
+    "wait-on": "^7.0.1"
+  },
+  "scripts": {
+    "start": "PORT=3001 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm start\" \"wait-on http://localhost:3001 && electron .\"",
+    "dist": "npm run build && electron-builder",
+    "dist-mac": "npm run build && electron-builder --mac"
+  },
+  "build": {
+    "appId": "com.tylerlyman.anchor",
+    "productName": "Anchor",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "build/**/*",
+      "public/electron.js",
+      "public/preload.js",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "resources/icon.icns",
+      "target": "dmg",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "resources/entitlements.mac.plist",
+      "entitlementsInherit": "resources/entitlements.mac.plist",
+      "notarize": {
+        "teamId": "Z8MDP8A3T2"
+      }
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
